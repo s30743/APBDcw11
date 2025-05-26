@@ -1,3 +1,6 @@
+using APBDCW11.Dal;
+using Microsoft.EntityFrameworkCore;
+
 namespace APBDCW11;
 
 public class Program
@@ -5,10 +8,14 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
+    
+        string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         // Add services to the container.
         builder.Services.AddAuthorization();
-
+        builder.Services.AddControllers();
+        builder.Services.AddDbContext<DatabaseContext>(options => 
+            options.UseSqlServer(connectionString)
+        );
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
