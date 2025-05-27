@@ -1,4 +1,5 @@
 using APBDCW11.Dal;
+using APBDCW11.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace APBDCW11;
@@ -18,6 +19,8 @@ public class Program
         );
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
+        builder.Services.AddScoped<IpatientService, patientService>();
+        builder.Services.AddScoped<IPrescrpitonServicw, PrescriptionService>();
 
         var app = builder.Build();
 
